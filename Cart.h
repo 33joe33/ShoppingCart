@@ -8,12 +8,7 @@ protected:
     map<int, int > ProductQuantity;
 public:
 
-
-    void setProductQuantity(int PID, int quantity) {
-        ProductQuantity[PID] += quantity;
-    }
-
-    const map<int, int>& getProductQuantity() const {
-        return ProductQuantity;
-    }
+    void setProductQuantity(int PID, int quantity);
+    const map<int, int>& getProductQuantity();
+    
 };
