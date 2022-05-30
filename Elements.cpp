@@ -51,13 +51,17 @@ class Product {
 };
 
 class Catagory {
+
 	protected:
 		int CAT_ID;
 		string CAT_NAME;
 		string DESCRIPTION;
 
 	public:
-		Catagory() {
-
+		Catagory(int id, string name, string desc) {
+			CAT_ID = id;
+			CAT_NAME = name;
+			DESCRIPTION = desc;
 		}
+
 };
