@@ -10,48 +10,24 @@ protected:
     int CAT_ID;
 
 public:
-    Product(int id, string name, float prc, int cat_id) {
-        PID = id;
-        PName = name;
-        price = prc;
-        CAT_ID = cat_id;
-    }
+    Product(int id, string name, float prc, int cat_id);
+    int getPid();
 
-    int getPid() const {
-        return PID;
-    }
+    void setPid(int pid);
 
-    void setPid(int pid) {
-        PID = pid;
-    }
+    const string& getPName();
 
-    const string& getPName() const {
-        return PName;
-    }
+    void setPName(const string& pName);
 
-    void setPName(const string& pName) {
-        PName = pName;
-    }
+    float getPrice();
 
-    float getPrice() const {
-        return price;
-    }
+    void setPrice(float price);
 
-    void setPrice(float price) {
-        Product::price = price;
-    }
+    int getCatId();
 
-    int getCatId() const {
-        return CAT_ID;
-    }
+    void setCatId(int catId);
 
-    void setCatId(int catId) {
-        CAT_ID = catId;
-    }
-
-    void display() {
-        cout << PID << " " << PName << " " << price;
-    }
+    void display();
 };
 // 111 LUX  40  SOAP  Some desc
 
@@ -64,35 +40,19 @@ protected:
     string DESCRIPTION;
 
 public:
-    Catagory(int id, string name, string desc) {
-        CAT_ID = id;
-        CAT_NAME = name;
-        DESCRIPTION = desc;
-    }
+    Catagory(int id, string name, string desc);
 
-    int getCatId() const {
-        return CAT_ID;
-    }
+    int getCatId();
 
-    void setCatId(int catId) {
-        CAT_ID = catId;
-    }
+    void setCatId(int catId);
 
-    const string& getCatName() const {
-        return CAT_NAME;
-    }
+    const string& getCatName();
 
-    void setCatName(const string& catName) {
-        CAT_NAME = catName;
-    }
+    void setCatName(const string& catName);
 
-    const string& getDescription() const {
-        return DESCRIPTION;
-    }
+    const string& getDescription();
 
-    void setDescription(const string& description) {
-        DESCRIPTION = description;
-    }
+    void setDescription(const string& description);
 
 
 };
