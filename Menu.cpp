@@ -55,7 +55,7 @@ void userMenu(string user)
     }while(ch!=5);
 }
 
-int main()
+void menu()
 {
     string user, password;
     int ch;
