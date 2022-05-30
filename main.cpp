@@ -1,5 +1,5 @@
 #include <iostream>
-#include"Menu.cpp"
+#include"menu.h"
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
