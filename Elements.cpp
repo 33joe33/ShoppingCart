@@ -64,4 +64,28 @@ class Catagory {
 			DESCRIPTION = desc;
 		}
 
+    int getCatId() const {
+        return CAT_ID;
+    }
+
+    void setCatId(int catId) {
+        CAT_ID = catId;
+    }
+
+    const string &getCatName() const {
+        return CAT_NAME;
+    }
+
+    void setCatName(const string &catName) {
+        CAT_NAME = catName;
+    }
+
+    const string &getDescription() const {
+        return DESCRIPTION;
+    }
+
+    void setDescription(const string &description) {
+        DESCRIPTION = description;
+    }
+
 };
