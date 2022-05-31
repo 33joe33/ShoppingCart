@@ -61,7 +61,7 @@ void userMenu(string user)
         {
         case 1:  AddToCart(*cart);
         case 2:  cart->display();break;
-        case 5: delete cart ;break;
+        case 5:  break;
         }
 
     } while (ch != 5);
@@ -129,4 +129,32 @@ void menu()
         default:cout << "\n Invalid option" << endl;
         }
     } while (ch != 10);
+}
+
+vector<Product *> search(const string& Name,const vector<Product*>& productList) {
+    vector<Product*> foundItems;
+    for (const auto &item: productList) {
+            if (item->getPName().substr(0,Name.size())==Name)
+                foundItems.push_back(item);
+    }
+    return foundItems;
+}
+
+vector<Product *> search(double priceLow, double priceHigh,const vector<Product*>&productList) {
+    vector<Product*> foundItems;
+    for (const auto &item: productList) {
+        if (item->getPrice()<=priceHigh&&item->getPrice()>=priceLow)
+            foundItems.push_back(item);
+    }
+    return foundItems;
+}
+
+vector<Product *> search(int CAT_ID,const vector<Product*>&productList) {
+    vector<Product*> foundItems;
+    for (const auto &item: productList) {
+        if (item->getCatId()==CAT_ID)
+            foundItems.push_back(item);
+    }
+    return foundItems;
+
 }

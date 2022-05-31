@@ -5,17 +5,23 @@ class Cart{
 protected:
     map<Product* ,int > ProductQuantity;
 public:
+    Cart();
 
+    void setProductQuantity(Product *product,int quantity) ;
 
-    void setProductQuantity(Product *product,int quantity);
+    const map<Product*, int> &getProductQuantity();
 
-    const map<Product*, int> &getProductQuantity() const {
-        return ProductQuantity;
-    }
     void display();
-    void deleteProduct(Product* product,int number);;
+    void deleteProduct(Product *product, int number);
 
-};
+
+
+
+    };
+
+
+
+
 
 
 

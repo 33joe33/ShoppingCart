@@ -50,6 +50,7 @@ class Product {
         CAT_ID = catId;
     }
     void display(){
+
             cout<<PID<<PName<<price<<CAT_ID<<endl;
         }
 };
@@ -91,5 +92,6 @@ class Category {
     void setDescription(const string &description) {
         DESCRIPTION = description;
     }
+
 
 };
