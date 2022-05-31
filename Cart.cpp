@@ -20,14 +20,22 @@ public:
             cout<<productIterator->second*productIterator->first->getPrice()<<endl;
         }
     }
-    void deleteProduct(Product* product,int number){
+    void deleteProduct(Product *product, int number) {
         ProductQuantity[product]-=number;
         if (ProductQuantity[product]<=0)
             ProductQuantity.erase(product);
 
 
+
+
     };
 
-};
+
+}l;
+
+
+
+
+
 
 

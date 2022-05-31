@@ -4,7 +4,7 @@
 #include "Menu.h"
 using namespace std;
 
-void addProduct(vector<Product*> p)
+void addProduct(vector<Product*> &p)
 {
     float price;
     int id=1, cat_id;
@@ -21,7 +21,7 @@ void addProduct(vector<Product*> p)
     p.push_back(ob);
 }
 
-void addCategories(vector<Category*> c)
+void addCategories(vector<Category*> &c)
 {
     int id=1;
     string name, description;
@@ -37,7 +37,18 @@ void addCategories(vector<Category*> c)
     c.push_back(ob);
 }
 
-void DisplayRecords(vector<Product*> p){}
+void DisplayRecords(vector<Product*> p) {
+
+    for (auto & i : p) {
+        i->display();
+
+
+    }
+}
+
+
+
+
 
 void userMenu(string user)
 {

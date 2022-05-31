@@ -49,6 +49,9 @@ class Product {
     void setCatId(int catId) {
         CAT_ID = catId;
     }
+    void display(){
+            cout<<PID<<PName<<price<<CAT_ID<<endl;
+        }
 };
 
 class Category {
