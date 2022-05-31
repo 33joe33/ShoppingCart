@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 
@@ -50,7 +51,7 @@ class Product {
     }
 };
 
-class Catagory {
+class Category {
 
 	protected:
 		int CAT_ID;
@@ -58,7 +59,7 @@ class Catagory {
 		string DESCRIPTION;
 
 	public:
-		Catagory(int id, string name, string desc) {
+		Category(int id, string name, string desc) {
 			CAT_ID = id;
 			CAT_NAME = name;
 			DESCRIPTION = desc;

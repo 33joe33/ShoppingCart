@@ -1,13 +1,13 @@
 #include<iostream>
 #include <string>
 #include<vector>
-#include "Elements.h"
+#include "Menu.h"
 using namespace std;
 
 void addProduct(vector<Product*> p)
 {
     float price;
-    int id, cat_id;
+    int id=1, cat_id;
     string name;
 
     cout << " Enter Product name = ";
@@ -23,7 +23,7 @@ void addProduct(vector<Product*> p)
 
 void addCategories(vector<Category*> c)
 {
-    int id;
+    int id=1;
     string name, description;
 
     cout << " Enter Cateogry ID =  ";
@@ -33,7 +33,7 @@ void addCategories(vector<Category*> c)
     cout << " Enter cateogory descrptin = ";
     getline(cin, description);
 
-    Category* ob = new Category(id, name, description);
+    auto* ob = new Category(id, name, description);
     c.push_back(ob);
 }
 

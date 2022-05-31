@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 
@@ -10,29 +11,47 @@ protected:
     int CAT_ID;
 
 public:
-    Product(int id, string name, float prc, int cat_id);
-    int getPid();
+    Product(int id, string name, float prc,int cat_id) {
+        PID = id;
+        PName = name;
+        price = prc;
+        CAT_ID = cat_id;
+    }
 
-    void setPid(int pid);
+    int getPid() const {
+        return PID;
+    }
 
-    const string& getPName();
+    void setPid(int pid) {
+        PID = pid;
+    }
 
-    void setPName(const string& pName);
+    const string &getPName() const {
+        return PName;
+    }
 
-    float getPrice();
+    void setPName(const string &pName) {
+        PName = pName;
+    }
 
-    void setPrice(float price);
+    float getPrice() const {
+        return price;
+    }
 
-    int getCatId();
+    void setPrice(float price) {
+        Product::price = price;
+    }
 
-    void setCatId(int catId);
+    int getCatId() const {
+        return CAT_ID;
+    }
 
-    void display();
+    void setCatId(int catId) {
+        CAT_ID = catId;
+    }
 };
-// 111 LUX  40  SOAP  Some desc
 
-
-class Catagory {
+class Category {
 
 protected:
     int CAT_ID;
@@ -40,20 +59,34 @@ protected:
     string DESCRIPTION;
 
 public:
-    Catagory(int id, string name, string desc);
+    Category(int id, string name, string desc) {
+        CAT_ID = id;
+        CAT_NAME = name;
+        DESCRIPTION = desc;
+    }
 
-    int getCatId();
+    int getCatId() const {
+        return CAT_ID;
+    }
 
-    void setCatId(int catId);
+    void setCatId(int catId) {
+        CAT_ID = catId;
+    }
 
-    const string& getCatName();
+    const string &getCatName() const {
+        return CAT_NAME;
+    }
 
-    void setCatName(const string& catName);
+    void setCatName(const string &catName) {
+        CAT_NAME = catName;
+    }
 
-    const string& getDescription();
+    const string &getDescription() const {
+        return DESCRIPTION;
+    }
 
-    void setDescription(const string& description);
-
+    void setDescription(const string &description) {
+        DESCRIPTION = description;
+    }
 
 };
-// 111 LUX  40  SOAP  Some desc
