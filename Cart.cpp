@@ -5,7 +5,9 @@ class Cart{
 protected:
     map<Product* ,int > ProductQuantity;
 public:
+    Cart(){
 
+    }
 
     void setProductQuantity(Product *product,int quantity) {
         ProductQuantity[product]+=quantity;

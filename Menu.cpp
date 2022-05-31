@@ -3,6 +3,7 @@
 #include<vector>
 #include "Menu.h"
 using namespace std;
+void AddToCart(Cart &cart);
 
 void addProduct(vector<Product*> &p)
 {
@@ -56,6 +57,7 @@ void userMenu(string user)
     cout << "\n 1 Add products to cart";
     cout << "\n 2 View cart";
     cout << "\n 5 exit";
+     Cart* cart =new Cart;
     cin >> ch;
     do
     {
@@ -63,12 +65,17 @@ void userMenu(string user)
 
         switch (ch)
         {
-        case 1: break;
-        case 2: break;
-        case 5: break;
+        case 1:  AddToCart(*cart);
+        case 2:  cart->display();break;
+        case 5: delete cart ;break;
         }
 
     } while (ch != 5);
+}
+
+void AddToCart(Cart &cart) {Product*product;
+    int quantity;
+    cart.setProductQuantity(product,quantity);
 }
 
 void adminMenu(string user, string password)
