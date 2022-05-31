@@ -1,6 +1,8 @@
 #include<iostream>
 
 using namespace std;
+static int product_Id = 1;
+static int category_Id= 1;
 
 
 class Product {
@@ -11,8 +13,12 @@ protected:
     int CAT_ID;
 
 public:
-    Product(int id, string name, float prc,int cat_id) {
-        PID = id;
+    Product() {
+        cout << "created";
+    }
+
+    Product(string name, float prc,int cat_id) {
+        PID = product_Id++;
         PName = name;
         price = prc;
         CAT_ID = cat_id;
@@ -62,8 +68,8 @@ protected:
     string DESCRIPTION;
 
 public:
-    Category(int id, string name, string desc) {
-        CAT_ID = id;
+    Category(string name, string desc) {
+        CAT_ID = category_Id++;
         CAT_NAME = name;
         DESCRIPTION = desc;
     }
