@@ -1,14 +1,8 @@
-#include<iostream>
-#include <map>
-#include "Elements.cpp"
-using namespace std;
+//
+// Created by josep on 30/05/2022.
+//
 
-class Cart {
-protected:
-    map<int, int > ProductQuantity;
-public:
+#ifndef SHOPPINGCART_CART_H
+#define SHOPPINGCART_CART_H
 
-    void setProductQuantity(int PID, int quantity);
-    const map<int, int>& getProductQuantity();
-    
-};
+#endif //SHOPPINGCART_CART_H

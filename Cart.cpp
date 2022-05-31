@@ -1,20 +1,33 @@
-#include<iostream>
 #include <map>
-#include "Elements.cpp"
+#include "Elements.h"
 using namespace std;
 class Cart{
 protected:
-    map<int ,int > ProductQuantity;
+    map<Product* ,int > ProductQuantity;
 public:
 
 
-    void setProductQuantity(int PID,int quantity) {
-        ProductQuantity[PID]+=quantity;
+    void setProductQuantity(Product *product,int quantity) {
+        ProductQuantity[product]+=quantity;
     }
 
-    const map<int, int> &getProductQuantity() const {
+    const map<Product*, int> &getProductQuantity() const {
         return ProductQuantity;
     }
+    void display(){
+        for (auto productIterator = ProductQuantity.begin(); productIterator != ProductQuantity.end(); ++productIterator) {
+            cout<<productIterator->first->getPName();
+            cout<<productIterator->second*productIterator->first->getPrice()<<endl;
+        }
+    }
+    void deleteProduct(Product* product,int number){
+        ProductQuantity[product]-=number;
+        if (ProductQuantity[product]<=0)
+            ProductQuantity.erase(product);
+
+
+    };
+
 };
 
 

@@ -7,4 +7,4 @@ add_executable(ShoppingCart
         main.cpp
         Elements.cpp
         Cart.cpp
-        Menu.cpp)
+        Menu.cpp Cart.h)

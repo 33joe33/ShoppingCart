@@ -1,24 +1,21 @@
 #include<iostream>
-#include <string>
+#include "string"
 using namespace std;
 
-
-void adminMenu(string user,string password)
+void adminMenu(string user)
 {
     int ch;
-
 //	cout<<"Please enter password";
-//	cin>>getline(password,1);
+//	getline(cin,password);
 
 //	if (User== "admin" && password == "123")
+    cout<<"\n 1 add product";
+    cout<<"\n 2 add categories";
+    cout<<"\n 3 see records";
+    cout<<"\n 5 exit";
+    cin>>ch;
     do
     {
-        cout<<"\n 1 add product";
-        cout<<"\n 2 add categories";
-        cout<<"\n 3 see records";
-        cout<<"\n 5 exit";
-        cin>>ch;
-
         switch(ch)
         {
             case 1: break;
@@ -37,13 +34,12 @@ void adminMenu(string user,string password)
 void userMenu(string user)
 {
     int  ch;
-    cout<<"\n 1 View products";
-    cout<<"\n 2 View";
-    cout<<"\n 5 exit";
-    cin>>ch;
     do
     {
-
+        cout<<"\n 1 View products";
+        cout<<"\n 2 View";
+        cout<<"\n 5 exit";
+        cin>>ch;
 
         switch(ch)
         {
@@ -55,7 +51,7 @@ void userMenu(string user)
     }while(ch!=5);
 }
 
-void menu()
+void  menu()
 {
     string user, password;
     int ch;
@@ -66,14 +62,14 @@ void menu()
         cout<<"\n Enter choice: \n";
         cin>>ch;
 
-        if(ch >= 1 && ch<2)
+        if(ch >= 1 && ch<=2)
         {
             cout<<"\n Enter Name ";
-            getline(cin,user);
+            getline(cin, user);
         }
         switch(ch)
         {
-            case 1: adminMenu(user, password);break;
+            case 1: adminMenu(user);break;
             case 2: userMenu(user);break;
             case 10:break;
             default:cout<<"\n Invalid option"<<endl;
