@@ -18,7 +18,7 @@ void addProduct(vector<Product*> &p)
         cout << " Enter Category ID = ";
     cin >> cat_id;
 
-    Product* ob = new Product(id, name, price, cat_id);
+    Product* ob = new Product(name, price, cat_id);
     p.push_back(ob);
 }
 
@@ -27,29 +27,24 @@ void addCategories(vector<Category*> &c)
     int id=1;
     string name, description;
 
-    cout << " Enter Cateogry ID =  ";
+    cout << " Enter Category ID =  ";
     cin >> id;
     cout << " Enter Category name = ";
     cin>>name;
     cout << " Enter cateogory descrptin = ";
     cin>>description;
 
-    auto* ob = new Category(id, name, description);
+    auto* ob = new Category(name, description);
     c.push_back(ob);
 }
 
-void DisplayRecords(vector<Product*> p) {
-
-    for (auto & i : p) {
+void DisplayRecords(vector<Product*> p) 
+{
+    for (auto & i : p) 
+    {
         i->display();
-
-
     }
 }
-
-
-
-
 
 void userMenu(string user)
 {
@@ -61,7 +56,6 @@ void userMenu(string user)
     cin >> ch;
     do
     {
-
 
         switch (ch)
         {
@@ -75,7 +69,7 @@ void userMenu(string user)
 
 void AddToCart(Cart &cart) {Product*product;
     int quantity;
-    cart.setProductQuantity(product,quantity);
+   // cart.setProductQuantity(product,quantity);
 }
 
 void adminMenu(string user, string password)
