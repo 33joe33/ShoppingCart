@@ -4,45 +4,11 @@
 #include "Elements.h"
 using namespace std;
 
-
-void adminMenu(string user, string password)
-{
-    int ch;
-
-    vector<Product*> ProductList;
-    vector<Category*> CategoryList;
-    //	cout<<"Please enter password";
-    //	cin>>getline(password,1);
-
-    //	if (User== "admin" && password == "123")
-    do
-    {
-        cout << "\n 1 add product";
-        cout << "\n 2 add categories";
-        cout << "\n 3 see records";
-        cout << "\n 5 exit";
-        cin >> ch;
-
-        switch (ch)
-        {
-        case 1:addProduct(ProductList); break;
-        case 2:addCategories(CategoryList); break;
-        case 3:DisplayRecords(ProductList); break;
-        case 5: break;
-        }
-
-    } while (ch != 5);
-    //	else
-    //	{
-    //		cout<<"Wrong password or admin";
-    //	}
-}
-
 void addProduct(vector<Product*> p)
 {
-    float price,
-        int id, cat_id;
-        string name;
+    float price;
+    int id, cat_id;
+    string name;
 
     cout << " Enter Product name = ";
     getline(cin, name);
@@ -92,6 +58,39 @@ void userMenu(string user)
         }
 
     } while (ch != 5);
+}
+
+void adminMenu(string user, string password)
+{
+    int ch;
+
+    vector<Product*> ProductList;
+    vector<Category*> CategoryList;
+    //	cout<<"Please enter password";
+    //	cin>>getline(password,1);
+
+    //	if (User== "admin" && password == "123")
+    do
+    {
+        cout << "\n 1 add product";
+        cout << "\n 2 add categories";
+        cout << "\n 3 see records";
+        cout << "\n 5 exit";
+        cin >> ch;
+
+        switch (ch)
+        {
+        case 1:addProduct(ProductList); break;
+        case 2:addCategories(CategoryList); break;
+        case 3:DisplayRecords(ProductList); break;
+        case 5: break;
+        }
+
+    } while (ch != 5);
+    //	else
+    //	{
+    //		cout<<"Wrong password or admin";
+    //	}
 }
 
 void menu()
