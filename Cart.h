@@ -1,8 +1,3 @@
-//
-// Created by josep on 30/05/2022.
-//
 
-#ifndef SHOPPINGCART_CART_H
-#define SHOPPINGCART_CART_H
+class Cart{};
 
-#endif //SHOPPINGCART_CART_H

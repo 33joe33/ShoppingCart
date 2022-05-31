@@ -11,7 +11,7 @@ void addProduct(vector<Product*> p)
     string name;
 
     cout << " Enter Product name = ";
-    getline(cin, name);
+    cin>>name;
     cout << " Enter Product price = ";
     cin >> price;
         cout << " Enter Category ID = ";
@@ -29,9 +29,9 @@ void addCategories(vector<Category*> c)
     cout << " Enter Cateogry ID =  ";
     cin >> id;
     cout << " Enter Category name = ";
-    getline(cin, name);
+    cin>>name;
     cout << " Enter cateogory descrptin = ";
-    getline(cin, description);
+    cin>>description;
 
     auto* ob = new Category(id, name, description);
     c.push_back(ob);
@@ -42,8 +42,8 @@ void DisplayRecords(vector<Product*> p){}
 void userMenu(string user)
 {
     int  ch;
-    cout << "\n 1 View products";
-    cout << "\n 2 View";
+    cout << "\n 1 Add products to cart";
+    cout << "\n 2 View cart";
     cout << "\n 5 exit";
     cin >> ch;
     do
