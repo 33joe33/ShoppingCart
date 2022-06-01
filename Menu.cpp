@@ -51,7 +51,7 @@ void displayCategories(vector<Category*> c)
     }
 }
 
-void userMenu(string user)
+void userMenu(string user,vector<Product*> &ProductList,vector<Category*> &CategoryList)
 {
     int  ch;
     cout << "\n 1 Add products to cart";
@@ -64,7 +64,7 @@ void userMenu(string user)
 
         switch (ch)
         {
-        case 1:  AddToCart(*cart);
+        case 1:  selectionProduct(ProductList);
         case 2:  cart->display(); break;
         case 5:  break;
         }
@@ -79,12 +79,12 @@ void AddToCart(Cart& cart) {
     // cart.setProductQuantity(product,quantity);
 }
 
-void adminMenu(string user, string password)
+void adminMenu(string user, string password,vector<Product*> &ProductList,vector<Category*> &CategoryList)
 {
     int ch;
 
-    vector<Product*> ProductList;
-    vector<Category*> CategoryList;
+
+
     //	cout<<"Please enter password";
     //	cin>>getline(password,1);
 
@@ -115,7 +115,8 @@ void adminMenu(string user, string password)
 }
 
 void menu()
-{
+{    vector<Product*> ProductList;
+     vector<Category *> CategoryList;
     string user, password;
     int ch;
     do
@@ -132,8 +133,8 @@ void menu()
         }
         switch (ch)
         {
-        case 1: adminMenu(user, password); break;
-        case 2: userMenu(user); break;
+        case 1: adminMenu(user, password,ProductList,CategoryList); break;
+        case 2: userMenu(user,ProductList,CategoryList); break;
         case 10:break;
         default:cout << "\n Invalid option" << endl;
         }
@@ -166,4 +167,58 @@ vector<Product*> search(int CAT_ID, const vector<Product*>& productList) {
     }
     return foundItems;
 
+}
+void selectionProduct(vector<Product*> ProductList)
+
+{int ch;
+    do{
+
+    string name;
+    double low, high;
+    int id;
+    cout << "\n 1 Search by name";
+    cout << "\n 2 Search by price";
+    cout << "\n 3 Search by category";
+    cout << "\n 5 exit";
+    cin>>ch;
+    Cart* cart =new Cart;
+    vector<Product*>subProductList;
+
+
+        switch (ch) {
+            case 1: {
+                cout << "Enter name";
+                cin >> name;
+                subProductList = search(name, ProductList);
+                for (const auto &item: subProductList) {
+                    item->display();
+
+                }
+                break;
+            }
+            case 2: {
+                cout << "Enter low = ";
+                cin >> low;
+                cout << "Enter high = ";
+                cin >> high;
+                subProductList = search(low, high, ProductList);
+                for (const auto &item: subProductList) {
+                    item->display();
+                    break;
+                }
+            }
+            case 3: {
+                cout << "Enter category ID";
+                cin >> id;
+                subProductList = search(id, ProductList);
+                for (const auto &item: subProductList) {
+                    item->display();
+                    break;}
+                    case 5: {
+                        break;
+                    }
+
+            }
+        }
+    } while (ch != 5);
 }
