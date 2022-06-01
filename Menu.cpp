@@ -67,8 +67,10 @@ void userMenu(string user)
     } while (ch != 5);
 }
 
-void AddToCart(Cart &cart) {Product*product;
+void AddToCart(Cart &cart) {
+    Product*product;
     int quantity;
+
    // cart.setProductQuantity(product,quantity);
 }
 
@@ -134,7 +136,7 @@ void menu()
 vector<Product *> search(const string& Name,const vector<Product*>& productList) {
     vector<Product*> foundItems;
     for (const auto &item: productList) {
-            if (item->getPName().substr(0,Name.size())==Name)
+            if (item->getPName().find(Name)!=string::npos)
                 foundItems.push_back(item);
     }
     return foundItems;
