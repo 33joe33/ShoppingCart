@@ -9,8 +9,9 @@ bool catExists(int catId, const vector<Category*>& categoryList);
 
 void addProduct(vector<Product*>& p, vector<Category*>& c)
 {
-    if (c.empty())
+    if (c.empty()){
         cout << "\n no categories"; return;
+    }
     float price;
     int  cat_id;
     string name;
