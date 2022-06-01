@@ -44,7 +44,7 @@ void addCategories(vector<Category*>& c)
 
     cout << " Enter Category name = ";
     cin >> name;
-    cout << " Enter cateogory descrptin = ";
+    cout << " Enter category description = ";
     cin >> description;
 
     auto* ob = new Category(name, description);
@@ -67,20 +67,21 @@ void displayCategories(vector<Category*> c)
     }
 }
 
-void userMenu(string user,vector<Product*> &ProductList,vector<Category*> &CategoryList)
-{
-    int  ch;
+void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*> &CategoryList)
+{int  ch;
+    do
+    {
+
     cout << "\n 1 Add products to cart";
     cout << "\n 2 View cart";
     cout << "\n 5 exit";
     Cart* cart = new Cart;
     cin >> ch;
-    do
-    {
+
 
         switch (ch)
         {
-        case 1:  selectionProduct(ProductList);
+        case 1:  selectionProduct(ProductList);break;
         case 2:  cart->display(); break;
         case 5:  break;
         }
@@ -88,14 +89,8 @@ void userMenu(string user,vector<Product*> &ProductList,vector<Category*> &Categ
     } while (ch != 5);
 }
 
-void AddToCart(Cart& cart) {
-    Product* product;
-    int quantity;
 
-    // cart.setProductQuantity(product,quantity);
-}
-
-void adminMenu(string user, string password,vector<Product*> &ProductList,vector<Category*> &CategoryList)
+void adminMenu(const string& user, const string& password,vector<Product*> &ProductList,vector<Category*> &CategoryList)
 {
     int ch;
 
@@ -184,9 +179,10 @@ vector<Product*> search(int CAT_ID, const vector<Product*>& productList) {
     return foundItems;
 
 }
-void selectionProduct(vector<Product*> ProductList)
+void selectionProduct(const vector<Product*>& ProductList)
 
-{int ch;
+{
+    int ch1;
     do{
 
     string name;
@@ -195,62 +191,88 @@ void selectionProduct(vector<Product*> ProductList)
     cout << "\n 1 Search by name";
     cout << "\n 2 Search by price";
     cout << "\n 3 Search by category";
+    cout << "\n 4 Select by ID";
     cout << "\n 5 exit";
-    cin>>ch;
+    cin>>ch1;
     Cart* cart =new Cart;
     vector<Product*>subProductList;
 
 
-        switch (ch) {
-            case 1: {
+        switch (ch1) {
+            case 1:
                 cout << "Enter name";
                 cin >> name;
                 subProductList = search(name, ProductList);
                 for (const auto &item: subProductList) {
                     item->display();
-
                 }
                 break;
-            }
-            case 2: {
+
+            case 2:
+
                 cout << "Enter low = ";
                 cin >> low;
                 cout << "Enter high = ";
                 cin >> high;
                 subProductList = search(low, high, ProductList);
                 for (const auto &item: subProductList) {
-                    item->display();
+                    item->display();}
                     break;
-                }
-            }
-            case 3: {
+
+            case 3:
+
                 cout << "Enter category ID";
                 cin >> id;
                 subProductList = search(id, ProductList);
                 for (const auto &item: subProductList) {
-                    item->display();
-                    break;}
-                    case 5: {
-                        break;
-                    }
+                    item->display();}
+                    break;
 
-            }
+            case 4:
+
+                select(cart,subProductList);break;
+
+
+            case 5:
+                break;
         }
-    } while (ch != 5);
+            ;
+    } while (ch1 != 5);
+    //AddToCart( cart)
+}
+void AddToCart(Cart& cart) {
+    Product* product;
+    int quantity;
+
+    // cart.setProductQuantity(product,quantity);
 }
 
-Product* searchSingle(int productId, const vector<Product*>& productList)
-{
-    for (const auto& item : productList) {
-        if (item->getPid() == productId)
-            return item;
-    }
+void select(Cart *cart, const vector<Product *> &subProductList) {int id;
+    int quantity;
+    cout<<"give product id of product"  <<endl;
+    cin>>id;
+    cout<<"give quantity of selected product"<<endl;
+    cin>>quantity;
+    cart->setProductQuantity(searchSingle(id,subProductList),quantity);
 }
 
-bool catExists(int catId, const vector<Category*>& categoryList) {
+bool catExists(int catId, const vector<Category *> &categoryList) {
     for (const auto& item : categoryList) {
         if (item->getCatId() == catId)
             return true;
     }
     return false;
 }
+
+Product *searchSingle(int productId, const vector<Product *> &productList) {
+    for (const auto& item : productList) {
+        if (item->getPid() == productId)
+            return item;
+    }
+}
+
+
+
+
+
+
