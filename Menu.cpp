@@ -4,19 +4,33 @@
 #include "Menu.h"
 using namespace std;
 void AddToCart(Cart& cart);
+void displayCategories(vector<Category*> c);
+bool catExists(int catId, const vector<Category*>& categoryList);
 
-void addProduct(vector<Product*>& p)
+void addProduct(vector<Product*>& p, vector<Category*>& c)
 {
     float price;
     int  cat_id;
     string name;
+    bool flag = true;
 
     cout << " Enter Product name = ";
     cin >> name;
     cout << " Enter Product price = ";
     cin >> price;
-    cout << " Enter Category ID = ";
-    cin >> cat_id;
+    while (flag) {
+        displayCategories(c);
+        cout << " Enter Category ID = ";
+        cin >> cat_id;
+        if (catExists(cat_id, c)) {
+            flag = false;
+        }
+        else {
+            cout << "invalid category \n";
+        }
+    }
+    
+
 
     Product* ob = new Product(name, price, cat_id);
     p.push_back(ob);
@@ -100,7 +114,7 @@ void adminMenu(string user, string password,vector<Product*> &ProductList,vector
 
         switch (ch)
         {
-        case 1:addProduct(ProductList); break;
+        case 1:addProduct(ProductList, CategoryList); break;
         case 2:addCategories(CategoryList); break;
         case 3:DisplayRecords(ProductList); break;
         case 4:displayCategories(CategoryList); break;
@@ -115,8 +129,8 @@ void adminMenu(string user, string password,vector<Product*> &ProductList,vector
 }
 
 void menu()
-{    vector<Product*> ProductList;
-     vector<Category *> CategoryList;
+{   vector<Product*> ProductList;
+    vector<Category *> CategoryList;
     string user, password;
     int ch;
     do
