@@ -55,7 +55,7 @@ void addCategories(vector<Category*>& c)
 }
 
 void DisplayRecords(vector<Product*> p, vector<Category*> c)
-{
+{   cout<<"id\tName\tPrice\tCategory\tdescription"<<endl;
     for (auto& i : p)
     {
         i->dsply();

@@ -56,10 +56,10 @@ public:
         CAT_ID = catId;
     }
     void display(){
-        cout<<PID<<" "<<PName<<" $"<<price<<" "<<CAT_ID<<endl;
+        cout<<PID<<"\t "<<PName<<"\t $"<<price<<"\t "<<CAT_ID<<endl;
     }
     void dsply() {
-        cout << PID << " " << PName << " $" << price << " ";
+        cout << PID << "\t " << PName << "\t $" << price << "\t ";
     }
 };
 
@@ -104,6 +104,6 @@ public:
         cout << CAT_ID << "  " << CAT_NAME << "  " << DESCRIPTION << endl;
     }
     void dsply() {
-        cout << CAT_NAME << "  " << DESCRIPTION << endl;
+        cout << CAT_NAME << "\t " << DESCRIPTION << endl;
     }
 };
