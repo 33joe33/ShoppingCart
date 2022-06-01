@@ -83,21 +83,24 @@ void searchCategories(vector<Category*> c,int cat_id)
 }
 
 void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*> &CategoryList)
-{int  ch;
+{
+    int  ch;
+     Cart* cart = new Cart;
     do
     {
 
     cout << "\n 1 Add products to cart";
     cout << "\n 2 View cart";
     cout << "\n 5 exit";
-    Cart* cart = new Cart;
+
     cin >> ch;
 
 
         switch (ch)
         {
         case 1:  selectionProduct(cart,ProductList);break;
-        case 2:  cart->display(); break;
+        case 2:
+            viewCart(cart,ProductList); break;
         case 5:  break;
         }
 
@@ -244,7 +247,8 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
             case 4:
 
-                select(cart,ProductList);break;
+                select(cart,ProductList);
+                break;
 
 
             case 5:
@@ -279,6 +283,34 @@ bool catExists(int catId, const vector<Category *> &categoryList) {
             return true;
     }
     return false;
+}
+
+void viewCart(Cart *cart, const vector<Product *> &ProductList) {
+    int ch;
+    do
+    {
+        cart->display();
+
+        cout << "\n 1 Remove from cart";
+        cout << "\n 2 Clear cart";
+        cout << "\n 5 exit";
+        cin >> ch;
+
+        switch (ch) {
+            case 1:
+                int id,quantity ;
+                cout<<"please enter product id"<<endl;
+                cin>>id;
+                cout<<"how many would you like to remove"<<endl;
+                cin>>quantity;
+                cart->deleteProduct(searchSingle(id,ProductList),quantity);break;
+            case 2:
+                cart->deleteCart();
+
+            case 5:
+                break;
+        }
+    } while (ch != 5);
 }
 
 Product *searchSingle(int productId, const vector<Product *> &productList) {

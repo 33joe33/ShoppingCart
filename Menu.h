@@ -18,3 +18,4 @@ void selectionProduct(Cart*cart,const vector<Product*>& ProductList);
 Product* searchSingle(int productId, const vector<Product*>& productList);
 bool catExists(int catId, const vector<Category*>& categoryList);
 void select(Cart *cart,const vector<Product*>&subProductList);
+void viewCart(Cart *cart,const vector<Product*>& ProductList);

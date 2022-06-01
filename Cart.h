@@ -16,9 +16,8 @@ public:
     void deleteProduct(Product *product, int number);
 
 
-
-
-    };
+    void deleteCart();
+};
 
 
 

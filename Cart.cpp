@@ -9,7 +9,7 @@ using namespace std;
      void Cart::setProductQuantity(Product *product,int quantity) {
 
         ProductQuantity[product]+=quantity;
-        cout<<ProductQuantity[product]<<endl;
+
 
     }
 
@@ -30,14 +30,22 @@ using namespace std;
         cout<<"Total Cart Price is $"<<totalPrice<<endl;
     }
     void Cart::deleteProduct(Product *product, int number) {
-        ProductQuantity[product]-=number;
+        ProductQuantity[product]=number;
+
         if (ProductQuantity[product]<=0)
             ProductQuantity.erase(product);
 
 
 
 
-    };
+    }
+
+void Cart::deleteCart(){
+    for (auto productIterator = ProductQuantity.begin(); productIterator != ProductQuantity.end(); ++productIterator) {
+        ProductQuantity.erase(productIterator->first);
+    }
+}
+    ;
 
 
 
