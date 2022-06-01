@@ -222,3 +222,19 @@ void selectionProduct(vector<Product*> ProductList)
         }
     } while (ch != 5);
 }
+
+Product* searchSingle(int productId, const vector<Product*>& productList)
+{
+    for (const auto& item : productList) {
+        if (item->getPid() == productId)
+            return item;
+    }
+}
+
+bool catExists(int catId, const vector<Category*>& categoryList) {
+    for (const auto& item : categoryList) {
+        if (item->getCatId() == catId)
+            return true;
+    }
+    return false;
+}
