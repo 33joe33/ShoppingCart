@@ -6,6 +6,8 @@ using namespace std;
 void AddToCart(Cart& cart);
 void displayCategories(vector<Category*> c);
 bool catExists(int catId, const vector<Category*>& categoryList);
+void searchCategories(vector<Category*> c, int cat_id);
+
 
 void addProduct(vector<Product*>& p, vector<Category*>& c)
 {
@@ -52,11 +54,12 @@ void addCategories(vector<Category*>& c)
     c.push_back(ob);
 }
 
-void DisplayRecords(vector<Product*> p)
+void DisplayRecords(vector<Product*> p, vector<Category*> c)
 {
     for (auto& i : p)
     {
-        i->display();
+        i->dsply();
+        searchCategories(c, (i->getCatId()));
     }
 }
 
@@ -65,6 +68,17 @@ void displayCategories(vector<Category*> c)
     for (auto& i : c)
     {
         i->display();
+    }
+}
+void searchCategories(vector<Category*> c,int cat_id)
+{
+    for (auto& i : c)
+    {
+        if (i->getCatId() == cat_id) 
+        {
+            i->dsply();
+            return;
+        }      
     }
 }
 
