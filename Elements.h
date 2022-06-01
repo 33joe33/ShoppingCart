@@ -97,5 +97,7 @@ public:
     void setDescription(const string &description) {
         DESCRIPTION = description;
     }
-
+    void display() {
+        cout << CAT_ID << "  " << CAT_NAME << "  " << DESCRIPTION << endl;
+    }
 };
