@@ -128,7 +128,7 @@ void adminMenu(const string& user, const string& password,vector<Product*> &Prod
         {
         case 1:addProduct(ProductList, CategoryList); break;
         case 2:addCategories(CategoryList); break;
-        case 3:DisplayRecords(ProductList); break;
+        case 3:DisplayRecords(ProductList, CategoryList); break;
         case 4:displayCategories(CategoryList); break;
         case 5: break;
         }
