@@ -15,14 +15,19 @@ using namespace std;
 
 
     void Cart::display(){
+         double totalPrice=0;
         for (auto item = ProductQuantity.begin(); item != ProductQuantity.end(); ++item) {
 
 
             cout<<item->second<<" ";
 
-            cout<<item->first->getPName()<<"for $ ";
-            cout<<item->second*item->first->getPrice()<<endl;
+            cout<<item->first->getPName()<<" for $ ";
+
+            double Price=item->second*item->first->getPrice();
+            cout<<Price<<endl;
+            totalPrice+=Price;
         }
+        cout<<"Total Cart Price is $"<<totalPrice<<endl;
     }
     void Cart::deleteProduct(Product *product, int number) {
         ProductQuantity[product]-=number;
