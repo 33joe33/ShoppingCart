@@ -96,7 +96,7 @@ void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*>
 
         switch (ch)
         {
-        case 1:  selectionProduct(ProductList);break;
+        case 1:  selectionProduct(cart,ProductList);break;
         case 2:  cart->display(); break;
         case 5:  break;
         }
@@ -194,7 +194,7 @@ vector<Product*> search(int CAT_ID, const vector<Product*>& productList) {
     return foundItems;
 
 }
-void selectionProduct(const vector<Product*>& ProductList)
+void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
 {
     int ch1;
@@ -209,7 +209,6 @@ void selectionProduct(const vector<Product*>& ProductList)
     cout << "\n 4 Select by ID";
     cout << "\n 5 exit";
     cin>>ch1;
-    Cart* cart =new Cart;
     vector<Product*>subProductList;
 
 
@@ -245,7 +244,7 @@ void selectionProduct(const vector<Product*>& ProductList)
 
             case 4:
 
-                select(cart,subProductList);break;
+                select(cart,ProductList);break;
 
 
             case 5:
@@ -268,7 +267,10 @@ void select(Cart *cart, const vector<Product *> &subProductList) {int id;
     cin>>id;
     cout<<"give quantity of selected product"<<endl;
     cin>>quantity;
+    searchSingle(id,subProductList);
+
     cart->setProductQuantity(searchSingle(id,subProductList),quantity);
+    cart->display();
 }
 
 bool catExists(int catId, const vector<Category *> &categoryList) {
@@ -280,9 +282,14 @@ bool catExists(int catId, const vector<Category *> &categoryList) {
 }
 
 Product *searchSingle(int productId, const vector<Product *> &productList) {
+
     for (const auto& item : productList) {
+
         if (item->getPid() == productId)
+        {
+
             return item;
+        }
     }
 }
 
