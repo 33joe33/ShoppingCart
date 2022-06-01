@@ -58,6 +58,9 @@ public:
     void display(){
         cout<<PID<<" "<<PName<<" $"<<price<<" "<<CAT_ID<<endl;
     }
+    void dsply() {
+        cout << PID << " " << PName << " $" << price << " ";
+    }
 };
 
 class Category {
@@ -99,5 +102,8 @@ public:
     }
     void display() {
         cout << CAT_ID << "  " << CAT_NAME << "  " << DESCRIPTION << endl;
+    }
+    void dsply() {
+        cout << CAT_NAME << "  " << DESCRIPTION << endl;
     }
 };
