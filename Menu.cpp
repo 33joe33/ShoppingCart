@@ -3,44 +3,49 @@
 #include<vector>
 #include "Menu.h"
 using namespace std;
-void AddToCart(Cart &cart);
+void AddToCart(Cart& cart);
 
-void addProduct(vector<Product*> &p)
+void addProduct(vector<Product*>& p)
 {
     float price;
-    int id=1, cat_id;
+    int  cat_id;
     string name;
 
     cout << " Enter Product name = ";
-    cin>>name;
+    cin >> name;
     cout << " Enter Product price = ";
     cin >> price;
-        cout << " Enter Category ID = ";
+    cout << " Enter Category ID = ";
     cin >> cat_id;
 
     Product* ob = new Product(name, price, cat_id);
     p.push_back(ob);
 }
 
-void addCategories(vector<Category*> &c)
+void addCategories(vector<Category*>& c)
 {
-    int id=1;
     string name, description;
 
-    cout << " Enter Category ID =  ";
-    cin >> id;
     cout << " Enter Category name = ";
-    cin>>name;
+    cin >> name;
     cout << " Enter cateogory descrptin = ";
-    cin>>description;
+    cin >> description;
 
     auto* ob = new Category(name, description);
     c.push_back(ob);
 }
 
-void DisplayRecords(vector<Product*> p) 
+void DisplayRecords(vector<Product*> p)
 {
-    for (auto & i : p) 
+    for (auto& i : p)
+    {
+        i->display();
+    }
+}
+
+void displayCategories(vector<Category*> c)
+{
+    for (auto& i : c)
     {
         i->display();
     }
@@ -52,7 +57,7 @@ void userMenu(string user)
     cout << "\n 1 Add products to cart";
     cout << "\n 2 View cart";
     cout << "\n 5 exit";
-     Cart* cart =new Cart;
+    Cart* cart = new Cart;
     cin >> ch;
     do
     {
@@ -60,18 +65,18 @@ void userMenu(string user)
         switch (ch)
         {
         case 1:  AddToCart(*cart);
-        case 2:  cart->display();break;
+        case 2:  cart->display(); break;
         case 5:  break;
         }
 
     } while (ch != 5);
 }
 
-void AddToCart(Cart &cart) {
-    Product*product;
+void AddToCart(Cart& cart) {
+    Product* product;
     int quantity;
 
-   // cart.setProductQuantity(product,quantity);
+    // cart.setProductQuantity(product,quantity);
 }
 
 void adminMenu(string user, string password)
@@ -89,6 +94,7 @@ void adminMenu(string user, string password)
         cout << "\n 1 add product";
         cout << "\n 2 add categories";
         cout << "\n 3 see records";
+        cout << "\n 4 see categories";
         cout << "\n 5 exit";
         cin >> ch;
 
@@ -97,6 +103,7 @@ void adminMenu(string user, string password)
         case 1:addProduct(ProductList); break;
         case 2:addCategories(CategoryList); break;
         case 3:DisplayRecords(ProductList); break;
+        case 4:displayCategories(CategoryList); break;
         case 5: break;
         }
 
@@ -133,28 +140,28 @@ void menu()
     } while (ch != 10);
 }
 
-vector<Product *> search(const string& Name,const vector<Product*>& productList) {
+vector<Product*> search(const string& Name, const vector<Product*>& productList) {
     vector<Product*> foundItems;
-    for (const auto &item: productList) {
-            if (item->getPName().find(Name)!=string::npos)
-                foundItems.push_back(item);
-    }
-    return foundItems;
-}
-
-vector<Product *> search(double priceLow, double priceHigh,const vector<Product*>&productList) {
-    vector<Product*> foundItems;
-    for (const auto &item: productList) {
-        if (item->getPrice()<=priceHigh&&item->getPrice()>=priceLow)
+    for (const auto& item : productList) {
+        if (item->getPName().find(Name) != string::npos)
             foundItems.push_back(item);
     }
     return foundItems;
 }
 
-vector<Product *> search(int CAT_ID,const vector<Product*>&productList) {
+vector<Product*> search(double priceLow, double priceHigh, const vector<Product*>& productList) {
     vector<Product*> foundItems;
-    for (const auto &item: productList) {
-        if (item->getCatId()==CAT_ID)
+    for (const auto& item : productList) {
+        if (item->getPrice() <= priceHigh && item->getPrice() >= priceLow)
+            foundItems.push_back(item);
+    }
+    return foundItems;
+}
+
+vector<Product*> search(int CAT_ID, const vector<Product*>& productList) {
+    vector<Product*> foundItems;
+    for (const auto& item : productList) {
+        if (item->getCatId() == CAT_ID)
             foundItems.push_back(item);
     }
     return foundItems;
