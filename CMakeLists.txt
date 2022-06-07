@@ -7,4 +7,10 @@ add_executable(ShoppingCart
         main.cpp
         Elements.cpp Elements.h
         Cart.cpp Cart.h
-        Menu.cpp Menu.h)
+        Menu.cpp Menu.h
+        sqlite3.c
+        sqlite3.h
+        sqlite3ext.h
+        data.cpp data.h)
+
+

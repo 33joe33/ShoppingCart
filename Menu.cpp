@@ -2,40 +2,35 @@
 #include <string>
 #include<vector>
 #include "Menu.h"
+
 using namespace std;
 void AddToCart(Cart& cart);
 void displayCategories(vector<Category*> c);
 bool catExists(int catId, const vector<Category*>& categoryList);
 void searchCategories(vector<Category*> c, int cat_id);
-
+const char* dir = R"(C:\Users\josep\Documents\Programing\STUDENTS.db)";
 
 void addProduct(vector<Product*>& p, vector<Category*>& c)
 {
-    if (c.empty()){
-        cout << "\n no categories"; return;
-    }
+
     float price;
     int  cat_id;
     string name;
     bool flag = true;
+    string category;
 
     cout << " Enter Product name = ";
     cin >> name;
     cout << " Enter Product price = ";
     cin >> price;
-    while (flag) {
-        displayCategories(c);
-        cout << " Enter Category ID = ";
-        cin >> cat_id;
-        if (catExists(cat_id, c)) {
-            flag = false;
-        }
-        else {
-            cout << "invalid category \n";
-        }
-    }
-    
+    cout<<"Enter category Name";
+    cin.ignore();
+    std::getline(cin,category);
 
+    cout<<category;
+
+    data dataConnection = data(dir) ;
+    dataConnection.add_product(name ,category,price);
 
     Product* ob = new Product(name, price, cat_id);
     p.push_back(ob);
@@ -43,13 +38,15 @@ void addProduct(vector<Product*>& p, vector<Category*>& c)
 
 void addCategories(vector<Category*>& c)
 {
+    data dataConnection = data(dir);
     string name, description;
 
     cout << " Enter Category name = ";
     cin >> name;
     cout << " Enter category description = ";
     cin >> description;
-
+    dataConnection.add_category(name, description);
+    sqlite3_close(dataConnection.database);
     auto* ob = new Category(name, description);
     c.push_back(ob);
 }
@@ -65,10 +62,14 @@ void DisplayRecords(vector<Product*> p, vector<Category*> c)
 
 void displayCategories(vector<Category*> c)
 {
-    for (auto& i : c)
+    data dataConnection(dir);
+    dataConnection.Select("CATEGORIES","*");
+
+    for (auto& i : dataConnection.categoryReturn())
     {
         i->display();
     }
+    sqlite3_close(dataConnection.database);
 }
 void searchCategories(vector<Category*> c,int cat_id)
 {
@@ -78,7 +79,7 @@ void searchCategories(vector<Category*> c,int cat_id)
         {
             i->dsply();
             return;
-        }      
+        }
     }
 }
 
@@ -148,6 +149,7 @@ void menu()
     vector<Category *> CategoryList;
     string user, password;
     int ch;
+
     do
     {
         cout << "\n 1 Admin - 2 User ";
@@ -324,7 +326,6 @@ Product *searchSingle(int productId, const vector<Product *> &productList) {
         }
     }
 }
-
 
 
 

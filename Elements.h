@@ -22,6 +22,7 @@ public:
         PName = name;
         price = prc;
         CAT_ID = cat_id;
+
     }
 
     int getPid() const {
@@ -72,7 +73,7 @@ protected:
 
 public:
     Category(string name, string desc) {
-        CAT_ID = category_Id++;
+        CAT_ID = 5;
         CAT_NAME = name;
         DESCRIPTION = desc;
     }

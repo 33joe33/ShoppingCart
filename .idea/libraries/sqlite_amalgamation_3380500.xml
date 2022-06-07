@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="sqlite-amalgamation-3380500" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$USER_HOME$/Documents/Programing/sqlite-amalgamation-3380500/sqlite3.c" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Documents/Programing/sqlite-amalgamation-3380500/sqlite3.c" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

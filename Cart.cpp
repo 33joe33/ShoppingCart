@@ -30,7 +30,7 @@ using namespace std;
         cout<<"Total Cart Price is $"<<totalPrice<<endl;
     }
     void Cart::deleteProduct(Product *product, int number) {
-        ProductQuantity[product]=number;
+        ProductQuantity[product]-=number;
 
         if (ProductQuantity[product]<=0)
             ProductQuantity.erase(product);
