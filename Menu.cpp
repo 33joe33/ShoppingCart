@@ -183,10 +183,10 @@ vector<Product*> search(const string& Name, const vector<Product*>& productList)
 
 vector<Product*> search(double priceLow, double priceHigh, const vector<Product*>& productList) {
     vector<Product*> foundItems;
-    for (const auto& item : productList) {
-        if (item->getPrice() <= priceHigh && item->getPrice() >= priceLow)
-            foundItems.push_back(item);
-    }
+    data dataConnection(dir);
+    string sql="PRODUCTS WHERE PRICE BETWEEN "+to_string(priceLow)+" AND "+ to_string(priceHigh)+"";
+    dataConnection.Select(sql.c_str(),"*");
+    foundItems =dataConnection.productReturn();
     return foundItems;
 }
 

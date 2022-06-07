@@ -15,8 +15,8 @@ public:
     sqlite3* database;
     sqlite3_stmt *stmt;
     explicit data(const char* name);
-    sqlite3 * connectDatabase(const char* name);
-     void execute(const char* sql);
+    static sqlite3 * connectDatabase(const char* name);
+     void execute(const char* sql) const;
     void add_category(const std::string& name ,const std::string& description);
     sqlite3_stmt * Select(const std::string& table, const std::string& columns);
     vector<Category *> categoryReturn() const;
