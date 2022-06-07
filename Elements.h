@@ -2,7 +2,7 @@
 
 using namespace std;
 static int product_Id = 1;
-static int category_Id= 0;
+static int category_Id= 1;
 
 
 class Product {
