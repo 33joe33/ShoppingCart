@@ -20,8 +20,9 @@ public:
     void add_category(const std::string& name ,const std::string& description);
     sqlite3_stmt * Select(const std::string& table, const std::string& columns);
     vector<Category *> categoryReturn() const;
-    void add_product(const string &name, const string &description);
-
+    vector<Product*> productReturn()const;
+    void displayRecords();
+    void close() const;
 
     void add_product(const string &name, const string &category, double price);
 };

@@ -59,7 +59,7 @@ void data::add_product(const std::string& name, const std::string& category,doub
         int cat =sqlite3_column_int(stmt,0);
         cat_id=cat;
     }
-    std::string sq= "INSERT INTO PRODUCT ( NAME, PRICE, CAT_ID) VALUES ('"+name+"',"+ to_string(price)+","+ to_string(cat_id)+")";
+    std::string sq= "INSERT INTO PRODUCTS ( NAME, PRICE, CATEGORY) VALUES ('"+name+"',"+ to_string(price)+","+ to_string(cat_id)+")";
     if (cat_id!=0)
         execute(sq.c_str());
     else
@@ -95,6 +95,44 @@ vector<Category*> data::categoryReturn() const  {
     }
     return toBeReturned;
 }
+vector<Product *> data::productReturn() const {
+
+    vector<Product *> toBeReturned;
+    int rc;
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    {
+        basic_string<unsigned char> uName = sqlite3_column_text(stmt, 1);
+        double price = sqlite3_column_double(stmt, 2);
+        int category = sqlite3_column_int(stmt ,3);
+        string name(uName.begin(), uName.end());
+
+
+        auto *product=  new Product(name, price,category);
+        toBeReturned.push_back(product);
+    }
+    return toBeReturned;
+}
+
+void data::close() const {
+    sqlite3_close(database);
+
+}
+
+void data::displayRecords() {std::string sql;
+    sql = "SELECT PRODUCTS.ID, PRODUCTS.NAME, PRICE, C.NAME, DESCRIPTION FROM PRODUCTS INNER JOIN CATEGORIES C on C.ID = PRODUCTS.CATEGORY";
+    int rc;
+
+
+    sqlite3_prepare(database, sql.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, 16);
+    printf(" \nID\tName\tprice\tcategory\tdescription\n");
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    {
+        printf("\n%s\t%s\t%s\t%s\t\t%s",sqlite3_column_text(stmt,0),sqlite3_column_text(stmt,1),sqlite3_column_text(stmt,2),sqlite3_column_text(stmt,3),sqlite3_column_text(stmt,4));
+    }
+
+}
+
 
 
 

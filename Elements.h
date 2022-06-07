@@ -2,7 +2,7 @@
 
 using namespace std;
 static int product_Id = 1;
-static int category_Id= 1;
+static int category_Id= 0;
 
 
 class Product {
@@ -73,7 +73,7 @@ protected:
 
 public:
     Category(string name, string desc) {
-        CAT_ID = 5;
+        CAT_ID = category_Id++;
         CAT_NAME = name;
         DESCRIPTION = desc;
     }

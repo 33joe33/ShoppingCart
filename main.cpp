@@ -1,25 +1,34 @@
 #include <iostream>
+#include <filesystem>
+#include<unistd.h>
 #include"Menu.h"
 
-int  callback(void *NotUsed, int argc ,char **argv,char**azColName){
 
-    for (int i = 0; i < argc; i++) {
-        cout<<azColName[i]<<":"<<argv[i]<<endl;
+void initialiseDatabase(const char * dir){
+    char* cwd [PATH_MAX];
+    getcwd(reinterpret_cast<char *>(cwd), sizeof (cwd));
 
-
-    }
-    return 0;
+    printf("this  %s\n",cwd);
+    auto database = data(dir)    ;
+    database.execute("CREATE TABLE IF NOT EXISTS CATEGORIES (\n"
+                     "    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                     "    NAME TEXT NOT NULL ,\n"
+                     "    DESCRIPTION TEXT NOT NULL\n"
+                     ")");
+    database.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (\n"
+                     "    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                     "    NAME TEXT NOT NULL ,\n"
+                     "    PRICE FLOAT,\n"
+                     "    CATEGORY INTEGER,\n"
+                     "    FOREIGN KEY (CATEGORY) REFERENCES CATEGORIES(ID)\n"
+                     ")");
+database.close();
 }
+
 int main() {
-    //sqlite3* dd;
-    //const char* dir = R"(C:\Users\josep\Documents\Programing\STUDENTS.db)";
-//    //cout<<sqlite3_open(dir,&dd);
-  //   auto dat=data(dir) ;
-//
-//dat.Select("ss","");
-//     dat.add_category("baked goods","stale");
-//    //sqlite3_exec(dat.database,"SELECT* FROM 'Categories';",callback,0,&err);
-    //dat.execute("INSERT INTO categories(id, name, description) VALUES (2,'fodod','tastsy')");
+
+    const char* dir=R"(C:\Users\josep\CLionProjects\ShoppingCart\ShoppingCart.db)";
+    initialiseDatabase(dir);
 
     menu();
 }

@@ -8,7 +8,7 @@ void AddToCart(Cart& cart);
 void displayCategories(vector<Category*> c);
 bool catExists(int catId, const vector<Category*>& categoryList);
 void searchCategories(vector<Category*> c, int cat_id);
-const char* dir = R"(C:\Users\josep\Documents\Programing\STUDENTS.db)";
+const char* dir = R"(C:\Users\josep\CLionProjects\ShoppingCart\ShoppingCart.db)";
 
 void addProduct(vector<Product*>& p, vector<Category*>& c)
 {
@@ -52,12 +52,12 @@ void addCategories(vector<Category*>& c)
 }
 
 void DisplayRecords(vector<Product*> p, vector<Category*> c)
-{   cout<<"id\tName\tPrice\tCategory\tdescription"<<endl;
-    for (auto& i : p)
-    {
-        i->dsply();
-        searchCategories(c, (i->getCatId()));
-    }
+{
+    data dataConnection(dir);
+
+
+
+    dataConnection.displayRecords();
 }
 
 void displayCategories(vector<Category*> c)
@@ -69,7 +69,7 @@ void displayCategories(vector<Category*> c)
     {
         i->display();
     }
-    sqlite3_close(dataConnection.database);
+    dataConnection.close();
 }
 void searchCategories(vector<Category*> c,int cat_id)
 {
