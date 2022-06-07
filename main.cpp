@@ -22,6 +22,11 @@ void initialiseDatabase(const char * dir){
                      "    CATEGORY INTEGER,\n"
                      "    FOREIGN KEY (CATEGORY) REFERENCES CATEGORIES(ID)\n"
                      ")");
+    database.execute("CREATE TABLE IF NOT EXISTS CART(\n"
+                     "    ID,INTEGER,\n"
+                     "    QUANTITY INTEGER,\n"
+                     "    FOREIGN KEY (ID) REFERENCES PRODUCTS(ID)\n"
+                     ")");
 database.close();
 }
 

@@ -1,7 +1,7 @@
 #include<iostream>
 #include <string>
 #include <vector>
-#include "data.h"
+#include "Cart.h"
 using namespace std;
 
 
@@ -17,5 +17,5 @@ vector<Product*> search(int CAT_ID,const vector<Product*>&productList);
 void selectionProduct(Cart*cart,const vector<Product*>& ProductList);
 Product* searchSingle(int productId, const vector<Product*>& productList);
 bool catExists(int catId, const vector<Category*>& categoryList);
-void select(Cart *cart,const vector<Product*>&subProductList);
+void select(Cart *cart);
 void viewCart(Cart *cart,const vector<Product*>& ProductList);

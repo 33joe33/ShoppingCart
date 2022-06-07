@@ -1,12 +1,14 @@
 #include<iostream>
 
 using namespace std;
-static int product_Id = 1;
-static int category_Id= 1;
 
 
 class Product {
+     int product_Id = 1;
+
+
 protected:
+
     int PID;
     string PName;
     float price;
@@ -65,7 +67,7 @@ public:
 };
 
 class Category {
-
+    int category_Id= 1;
 protected:
     int CAT_ID;
     string CAT_NAME;

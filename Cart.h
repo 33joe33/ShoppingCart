@@ -1,14 +1,15 @@
 #include <map>
-#include "Elements.h"
+
+#include "data.h"
 using namespace std;
 class Cart{
 
 
 public:
-    map<Product* ,int > ProductQuantity;
+    map<int ,int > ProductQuantity;
     Cart();
 
-    void setProductQuantity(Product *product,int quantity) ;
+    void setProductQuantity(int id,int quantity) ;
 
 
 

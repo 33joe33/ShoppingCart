@@ -174,11 +174,11 @@ void menu()
 
 vector<Product*> search(const string& Name, const vector<Product*>& productList) {
     vector<Product*> foundItems;
-    for (const auto& item : productList) {
-        if (item->getPName().find(Name) != string::npos)
-            foundItems.push_back(item);
-    }
-    return foundItems;
+    string sql;
+    data dataConnection(dir);
+    dataConnection.Select("PRODUCTS WHERE NAME IS '"+Name+"'","*");
+
+    return dataConnection.productReturn();
 }
 
 vector<Product*> search(double priceLow, double priceHigh, const vector<Product*>& productList) {
@@ -249,7 +249,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
             case 4:
 
-                select(cart,ProductList);
+                select(cart);
                 break;
 
 
@@ -267,15 +267,15 @@ void AddToCart(Cart& cart) {
     // cart.setProductQuantity(product,quantity);
 }
 
-void select(Cart *cart, const vector<Product *> &subProductList) {int id;
+void select(Cart *cart) {int id;
     int quantity;
+
     cout<<"give product id of product"  <<endl;
     cin>>id;
     cout<<"give quantity of selected product"<<endl;
     cin>>quantity;
-    searchSingle(id,subProductList);
 
-    cart->setProductQuantity(searchSingle(id,subProductList),quantity);
+    cart->setProductQuantity(id,quantity);
     cart->display();
 }
 
@@ -305,6 +305,7 @@ void viewCart(Cart *cart, const vector<Product *> &ProductList) {
                 cin>>id;
                 cout<<"how many would you like to remove"<<endl;
                 cin>>quantity;
+                searchSingle(id,ProductList)->display();
                 cart->deleteProduct(searchSingle(id,ProductList),quantity);break;
             case 2:
                 cart->deleteCart();
@@ -313,18 +314,14 @@ void viewCart(Cart *cart, const vector<Product *> &ProductList) {
                 break;
         }
     } while (ch != 5);
+    cout<<" why";
 }
 
 Product *searchSingle(int productId, const vector<Product *> &productList) {
+    data dataConnection(dir);
+    dataConnection.Select("PRODUCTS WHERE ID IS '"+to_string(productId)+"'","*");
+    return dataConnection.productReturn()[0];
 
-    for (const auto& item : productList) {
-
-        if (item->getPid() == productId)
-        {
-
-            return item;
-        }
-    }
 }
 
 
