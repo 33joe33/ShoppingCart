@@ -131,3 +131,34 @@ void data::displayRecords()
         }
 
     }
+
+void data::displayCategories()
+{
+    std::string sql;
+    sql = "SELECT *FROM CATEGORIES ";
+
+    sqlite3_prepare(database, sql.c_str(), -1, &stmt, nullptr);
+    sqlite3_bind_int(stmt, 1, 16);
+    printf(" \nID\tName\t\tDescription\n");
+    while (sqlite3_step(stmt) == SQLITE_ROW)
+    {
+        printf("\n%s\t%s\t\t%s",sqlite3_column_text(stmt,0),sqlite3_column_text(stmt,1), sqlite3_column_text(stmt,2));
+    }
+
+}
+
+void data::deleteCategory() {
+    string id;
+    cout<<"\nPlease enter the Category id"<<endl;
+    cin>>id;
+    string sql="DELETE  FROM CATEGORIES WHERE ID IS "+id;
+    data::execute(sql.c_str());
+}
+
+void data::deleteProduct() {
+    string id;
+    cout<<"\nPlease enter the Product id"<<endl;
+    cin>>id;
+    string sql="DELETE  FROM PRODUCTS WHERE ID IS "+id;
+    data::execute(sql.c_str());
+}

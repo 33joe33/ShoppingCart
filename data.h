@@ -23,8 +23,12 @@ public:
     vector<Product*> productReturn()const;
     void displayRecords();
     void close() const;
+    void deleteProduct();
+    void deleteCategory();
 
     void add_product(const string &name, const string &category, double price);
+
+    void displayCategories();
 };
 
 

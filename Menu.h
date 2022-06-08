@@ -17,3 +17,5 @@ void selectionProduct(Cart*cart);
 Product* searchSingle(int productId);
 void select(Cart *cart);
 void viewCart(Cart *cart);
+void deleteProduct();
+void deleteCategory();

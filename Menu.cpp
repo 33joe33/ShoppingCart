@@ -21,56 +21,56 @@ void addProduct() {   //add product to product database
     cout<<"Enter category Name";
     cin.ignore();
     std::getline(cin,category);
-
+    //cin ignore to make getline work
     data dataConnection = data(dir) ;
     dataConnection.add_product(name ,category,price);
-
+    dataConnection.close();
+    //make connection to database add product to database
 }
 
 void addCategories()
 {
     //add categories to the category table
-    data dataConnection = data(dir);
+
     string name, description;
 
     cout << " Enter Category name = ";
     cin >> name;
     cout << " Enter category description = ";
     cin >> description;
+    data dataConnection = data(dir);
     dataConnection.add_category(name, description);
-    sqlite3_close(dataConnection.database);
+    dataConnection.close();
+    // open connection add category and close connection
 }
 
-
 void DisplayRecords() {
+    //display products from the PRODUCTS database
     data dataConnection(dir);
     dataConnection.displayRecords();
     dataConnection.close();
-}
+    string del;
+    cout<<"delete product y/n"<<endl;
+    cin>>del;
+    if(del=="y")
+        deleteProduct();
 
+}
 
 void displayCategories() {
+
     data dataConnection(dir);
+    dataConnection.displayCategories();
     dataConnection.Select("CATEGORIES","*");
-
-    for (auto& i : dataConnection.categoryReturn())
-    {
-        i->display();
-    }
     dataConnection.close();
+    string del;
+    cout<<"delete category y/n"<<endl;
+    cin>>del;
+    if(del=="y")
+        deleteCategory();
+
 }
 
-void searchCategories(vector<Category*> c,int cat_id)
-{
-    for (auto& i : c)
-    {
-        if (i->getCatId() == cat_id) 
-        {
-            i->dsply();
-            return;
-        }
-    }
-}
 
 void userMenu(const string& user)
 {
@@ -112,9 +112,10 @@ void adminMenu(const string& user)
     {
         cout << "\n 1 add product";
         cout << "\n 2 add categories";
-        cout << "\n 3 see records";
+        cout << "\n 3 see products";
         cout << "\n 4 see categories";
         cout << "\n 5 exit";
+
         cin >> ch;
 
         switch (ch)
@@ -206,13 +207,13 @@ void selectionProduct(Cart *cart)
     cout << "\n 4 Select by ID";
     cout << "\n 5 exit";
     cin>>ch1;
-    vector<Product*>subProductList;
 
 
         switch (ch1) {
             case 1:
                 cout << "Enter name";
                 cin >> name;
+                cout<<"ID\t Name\tPrice"<<endl;
                 for (const auto &item: search(name)) {
                     item->display();
                 }
@@ -220,18 +221,20 @@ void selectionProduct(Cart *cart)
 
             case 2:
 
-                cout << "Enter low = ";
+                cout << "Enter low = "<<endl;
                 cin >> low;
-                cout << "Enter high = ";
+                cout << "Enter high = "<<endl;
                 cin >> high;
+                cout<<"ID\t Name\tPrice"<<endl;
                 for (const auto &item: search(low,high)) {
                     item->display();}
                     break;
 
             case 3:
 
-                cout << "Enter category Name";
+                cout << "Enter category Name"<<endl;
                 cin >> catName;
+                cout<<"ID\tName\tPrice"<<endl;
                 for (const auto &item: searchCategory(catName)) {
                     item->display();}
                     break;
@@ -258,14 +261,6 @@ void select(Cart *cart) {int id;
 
     cart->setProductQuantity(id,quantity);
     cart->display();
-}
-
-bool catExists(int catId, const vector<Category *> &categoryList) {
-    for (const auto& item : categoryList) {
-        if (item->getCatId() == catId)
-            return true;
-    }
-    return false;
 }
 
 void viewCart(Cart *cart) {
@@ -304,7 +299,17 @@ Product *searchSingle(int productId) {
     return dataConnection.productReturn()[0];
 
 }
+void deleteCategory(){
+    data dataConnection(dir);
+    dataConnection.deleteCategory();
+    dataConnection.close();
+}
 
+void deleteProduct(){
+    data dataConnection(dir);
+    dataConnection.deleteProduct();
+    dataConnection.close();
+}
 
 
 

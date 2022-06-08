@@ -59,7 +59,8 @@ public:
         CAT_ID = catId;
     }
     void display(){
-        cout<<PID<<"\t "<<PName<<"\t $"<<price<<"\t "<<CAT_ID<<endl;
+
+        cout<<PID<<"\t"<<PName<<"\t $"<<price<<"\t "<<endl;
     }
     void dsply() {
         cout << PID << "\t " << PName << "\t $" << price << "\t ";
