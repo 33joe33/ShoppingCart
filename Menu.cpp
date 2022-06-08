@@ -4,19 +4,14 @@
 #include "Menu.h"
 
 using namespace std;
-void AddToCart(Cart& cart);
-void displayCategories(vector<Category*> c);
-bool catExists(int catId, const vector<Category*>& categoryList);
-void searchCategories(vector<Category*> c, int cat_id);
+
+
 const char* dir = R"(C:\Users\josep\CLionProjects\ShoppingCart\ShoppingCart.db)";
 
-void addProduct(vector<Product*>& p, vector<Category*>& c)
-{
 
+void addProduct() {   //add product to product database
     float price;
-    int  cat_id;
     string name;
-    bool flag = true;
     string category;
 
     cout << " Enter Product name = ";
@@ -27,17 +22,14 @@ void addProduct(vector<Product*>& p, vector<Category*>& c)
     cin.ignore();
     std::getline(cin,category);
 
-    cout<<category;
-
     data dataConnection = data(dir) ;
     dataConnection.add_product(name ,category,price);
 
-    Product* ob = new Product(name, price, cat_id);
-    p.push_back(ob);
 }
 
-void addCategories(vector<Category*>& c)
+void addCategories()
 {
+    //add categories to the category table
     data dataConnection = data(dir);
     string name, description;
 
@@ -47,21 +39,17 @@ void addCategories(vector<Category*>& c)
     cin >> description;
     dataConnection.add_category(name, description);
     sqlite3_close(dataConnection.database);
-    auto* ob = new Category(name, description);
-    c.push_back(ob);
 }
 
-void DisplayRecords(vector<Product*> p, vector<Category*> c)
-{
+
+void DisplayRecords() {
     data dataConnection(dir);
-
-
-
     dataConnection.displayRecords();
+    dataConnection.close();
 }
 
-void displayCategories(vector<Category*> c)
-{
+
+void displayCategories() {
     data dataConnection(dir);
     dataConnection.Select("CATEGORIES","*");
 
@@ -71,6 +59,7 @@ void displayCategories(vector<Category*> c)
     }
     dataConnection.close();
 }
+
 void searchCategories(vector<Category*> c,int cat_id)
 {
     for (auto& i : c)
@@ -83,7 +72,7 @@ void searchCategories(vector<Category*> c,int cat_id)
     }
 }
 
-void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*> &CategoryList)
+void userMenu(const string& user)
 {
     int  ch;
      Cart* cart = new Cart;
@@ -99,9 +88,9 @@ void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*>
 
         switch (ch)
         {
-        case 1:  selectionProduct(cart,ProductList);break;
+        case 1:  selectionProduct(cart);break;
         case 2:
-            viewCart(cart,ProductList); break;
+            viewCart(cart); break;
         case 5:  break;
         }
 
@@ -109,7 +98,7 @@ void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*>
 }
 
 
-void adminMenu(const string& user, const string& password,vector<Product*> &ProductList,vector<Category*> &CategoryList)
+void adminMenu(const string& user)
 {
     int ch;
 
@@ -130,10 +119,10 @@ void adminMenu(const string& user, const string& password,vector<Product*> &Prod
 
         switch (ch)
         {
-        case 1:addProduct(ProductList, CategoryList); break;
-        case 2:addCategories(CategoryList); break;
-        case 3:DisplayRecords(ProductList, CategoryList); break;
-        case 4:displayCategories(CategoryList); break;
+        case 1:addProduct(); break;
+        case 2:addCategories(); break;
+        case 3:DisplayRecords(); break;
+        case 4:displayCategories(); break;
         case 5: break;
         }
 
@@ -164,33 +153,35 @@ void menu()
         }
         switch (ch)
         {
-        case 1: adminMenu(user, password,ProductList,CategoryList); break;
-        case 2: userMenu(user,ProductList,CategoryList); break;
+        case 1: adminMenu(user); break;
+        case 2: userMenu(user); break;
         case 10:break;
         default:cout << "\n Invalid option" << endl;
         }
     } while (ch != 10);
 }
 
-vector<Product*> search(const string& Name, const vector<Product*>& productList) {
+vector<Product*> search(const string& Name) {
     vector<Product*> foundItems;
     string sql;
     data dataConnection(dir);
     dataConnection.Select("PRODUCTS WHERE NAME LIKE '%"+Name+"%'","*");
-
-    return dataConnection.productReturn();
+    foundItems =dataConnection.productReturn();
+    dataConnection.close();
+    return foundItems;
 }
 
-vector<Product*> search(double priceLow, double priceHigh, const vector<Product*>& productList) {
+vector<Product*> search(double priceLow, double priceHigh) {
     vector<Product*> foundItems;
     data dataConnection(dir);
     string sql="PRODUCTS WHERE PRICE BETWEEN "+to_string(priceLow)+" AND "+ to_string(priceHigh)+"";
     dataConnection.Select(sql.c_str(),"*");
     foundItems =dataConnection.productReturn();
+    dataConnection.close();
     return foundItems;
 }
 
-vector<Product*> search(const string&  catName) {
+vector<Product*> searchCategory(const string&  catName) {
     vector<Product*> foundItems;
     data dataConnection (dir);
     string sql= " PRODUCTS INNER JOIN CATEGORIES C on PRODUCTS.CATEGORY = C.ID WHERE C.NAME LIKE '%"+catName+"%'";
@@ -201,12 +192,11 @@ vector<Product*> search(const string&  catName) {
     return foundItems;
 
 }
-void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
+void selectionProduct(Cart *cart)
 
 {
     int ch1;
     do{
-
     string name;
     double low, high;
     string catName;
@@ -223,8 +213,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
             case 1:
                 cout << "Enter name";
                 cin >> name;
-                subProductList = search(name, ProductList);
-                for (const auto &item: subProductList) {
+                for (const auto &item: search(name)) {
                     item->display();
                 }
                 break;
@@ -235,8 +224,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
                 cin >> low;
                 cout << "Enter high = ";
                 cin >> high;
-                subProductList = search(low, high, ProductList);
-                for (const auto &item: subProductList) {
+                for (const auto &item: search(low,high)) {
                     item->display();}
                     break;
 
@@ -244,8 +232,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
                 cout << "Enter category Name";
                 cin >> catName;
-                subProductList = search(catName);
-                for (const auto &item: subProductList) {
+                for (const auto &item: searchCategory(catName)) {
                     item->display();}
                     break;
 
@@ -260,15 +247,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
         }
             ;
     } while (ch1 != 5);
-    //AddToCart( cart)
 }
-void AddToCart(Cart& cart) {
-    Product* product;
-    int quantity;
-
-    // cart.setProductQuantity(product,quantity);
-}
-
 void select(Cart *cart) {int id;
     int quantity;
 
@@ -289,7 +268,7 @@ bool catExists(int catId, const vector<Category *> &categoryList) {
     return false;
 }
 
-void viewCart(Cart *cart, const vector<Product *> &ProductList) {
+void viewCart(Cart *cart) {
     int ch;
     do
     {
@@ -307,8 +286,8 @@ void viewCart(Cart *cart, const vector<Product *> &ProductList) {
                 cin>>id;
                 cout<<"how many would you like to remove"<<endl;
                 cin>>quantity;
-                searchSingle(id,ProductList)->display();
-                cart->deleteProduct(searchSingle(id,ProductList),quantity);break;
+                searchSingle(id)->display();
+                cart->deleteProduct(searchSingle(id),quantity);break;
             case 2:
                 cart->deleteCart();
 
@@ -319,7 +298,7 @@ void viewCart(Cart *cart, const vector<Product *> &ProductList) {
     cout<<" why";
 }
 
-Product *searchSingle(int productId, const vector<Product *> &productList) {
+Product *searchSingle(int productId) {
     data dataConnection(dir);
     dataConnection.Select("PRODUCTS WHERE ID IS '"+to_string(productId)+"'","*");
     return dataConnection.productReturn()[0];

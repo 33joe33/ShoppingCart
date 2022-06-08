@@ -3,19 +3,17 @@
 #include <vector>
 #include "Cart.h"
 using namespace std;
-
-
-void adminMenu(const string& user, const string& password,vector<Product*> &ProductList,vector<Category*> &CategoryList);
-void userMenu(const string& user,vector<Product*> &ProductList,vector<Category*> &CategoryList);
+void addProduct();
+void addCategories();
+void adminMenu(const string& user);
+void userMenu(const string& user);
 void menu();
-void addProduct(vector<Product*> &p);
-void addCategories(vector<Category*> &c);
-void DisplayRecords(vector<Product*> p);
-vector<Product*> search(double priceLow,double priceHigh,const vector<Product*>&productList);
-vector<Product*> search(const string& Name,const vector<Product*>&productList);
-vector<Product*> search(const string &catName);
-void selectionProduct(Cart*cart,const vector<Product*>& ProductList);
-Product* searchSingle(int productId, const vector<Product*>& productList);
-bool catExists(int catId, const vector<Category*>& categoryList);
+void DisplayRecords();
+void displayCategories();
+vector<Product*> search(double priceLow,double priceHigh);
+vector<Product*> search(const string& Name);
+vector<Product*> searchCategory(const string &catName);
+void selectionProduct(Cart*cart);
+Product* searchSingle(int productId);
 void select(Cart *cart);
-void viewCart(Cart *cart,const vector<Product*>& ProductList);
+void viewCart(Cart *cart);
