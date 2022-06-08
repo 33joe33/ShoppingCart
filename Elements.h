@@ -76,8 +76,8 @@ protected:
 public:
     Category(string name, string desc) {
         CAT_ID = category_Id++;
-        CAT_NAME = name;
-        DESCRIPTION = desc;
+        CAT_NAME = std::move(name);
+        DESCRIPTION = std::move(desc);
     }
 
     int getCatId() const {

@@ -13,7 +13,7 @@ void addCategories(vector<Category*> &c);
 void DisplayRecords(vector<Product*> p);
 vector<Product*> search(double priceLow,double priceHigh,const vector<Product*>&productList);
 vector<Product*> search(const string& Name,const vector<Product*>&productList);
-vector<Product*> search(int CAT_ID,const vector<Product*>&productList);
+vector<Product*> search(const string &catName);
 void selectionProduct(Cart*cart,const vector<Product*>& ProductList);
 Product* searchSingle(int productId, const vector<Product*>& productList);
 bool catExists(int catId, const vector<Category*>& categoryList);

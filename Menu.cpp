@@ -176,7 +176,7 @@ vector<Product*> search(const string& Name, const vector<Product*>& productList)
     vector<Product*> foundItems;
     string sql;
     data dataConnection(dir);
-    dataConnection.Select("PRODUCTS WHERE NAME IS '"+Name+"'","*");
+    dataConnection.Select("PRODUCTS WHERE NAME LIKE '%"+Name+"%'","*");
 
     return dataConnection.productReturn();
 }
@@ -190,12 +190,14 @@ vector<Product*> search(double priceLow, double priceHigh, const vector<Product*
     return foundItems;
 }
 
-vector<Product*> search(int CAT_ID, const vector<Product*>& productList) {
+vector<Product*> search(const string&  catName) {
     vector<Product*> foundItems;
-    for (const auto& item : productList) {
-        if (item->getCatId() == CAT_ID)
-            foundItems.push_back(item);
-    }
+    data dataConnection (dir);
+    string sql= " PRODUCTS INNER JOIN CATEGORIES C on PRODUCTS.CATEGORY = C.ID WHERE C.NAME LIKE '%"+catName+"%'";
+    dataConnection.Select(sql," PRODUCTS.ID, PRODUCTS.NAME,PRICE ");
+
+    foundItems =dataConnection.productReturn();
+    dataConnection.close();
     return foundItems;
 
 }
@@ -207,7 +209,7 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
     string name;
     double low, high;
-    int id;
+    string catName;
     cout << "\n 1 Search by name";
     cout << "\n 2 Search by price";
     cout << "\n 3 Search by category";
@@ -240,9 +242,9 @@ void selectionProduct(Cart *cart,const vector<Product*>& ProductList)
 
             case 3:
 
-                cout << "Enter category ID";
-                cin >> id;
-                subProductList = search(id, ProductList);
+                cout << "Enter category Name";
+                cin >> catName;
+                subProductList = search(catName);
                 for (const auto &item: subProductList) {
                     item->display();}
                     break;

@@ -8,7 +8,7 @@ void initialiseDatabase(const char * dir){
     char* cwd [PATH_MAX];
     getcwd(reinterpret_cast<char *>(cwd), sizeof (cwd));
 
-    printf("this  %s\n",cwd);
+
     auto database = data(dir)    ;
     database.execute("CREATE TABLE IF NOT EXISTS CATEGORIES (\n"
                      "    ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"

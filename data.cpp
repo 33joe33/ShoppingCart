@@ -10,11 +10,11 @@ data::data(const char * name)
 sqlite3* data::connectDatabase(const char *name)
     {
     sqlite3 *db;
-    std::cout<<name;
+    //std::cout<<name;
     auto rs=sqlite3_open(name,&db);
     if (!rs)
         {
-            std::cout<<"Connection made to "<< name<<std::endl;
+            //std::cout<<"Connection made to "<< name<<std::endl;
             return db;
         }
     std::cout<<"Connection failed"<< std::endl;
@@ -28,7 +28,7 @@ void data::execute(const char *sql) const
         auto rs =sqlite3_exec(database,sql,nullptr,nullptr,&Error);
         if (!rs)
         {
-            std::cout<<"Successful sql command execution"<<std::endl;
+            //std::cout<<"Successful sql command execution"<<std::endl;
             return;
         }
         std::cout<<"failed execution of\n "<<sql<<std::endl;
